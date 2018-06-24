@@ -34,12 +34,13 @@ void main() async {
                           color: Colors.grey,
                           fontStyle: FontStyle.italic
                         ),),
-                    leading: new CircleAvatar(
+                    leading: CircleAvatar(
                       backgroundColor: Colors.greenAccent,
                       child: Text("${_data[position]['body'][0]}",
                         style: TextStyle(fontSize: 13.4,
                         color: Colors.orangeAccent),),
                     ),
+                    onTap:() => _showOnTapMessage(context, _data[position]['body']),
                   )
                 ],
               );
@@ -47,6 +48,19 @@ void main() async {
       ),
     )
   ));
+}
+
+void _showOnTapMessage(BuildContext context, String message) {
+  var alert = AlertDialog(
+    title: Text("My App"),
+    content: Text(message),
+    actions: <Widget>[
+      FlatButton(child: Text("OK"), onPressed: () {
+        Navigator.pop(context);
+      },)
+    ],
+  );
+  showDialog(context: context, builder: (context) => alert);
 }
 
 Future<List> getJson() async {
